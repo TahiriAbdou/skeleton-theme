@@ -2,14 +2,15 @@
 If you are not a collection page here, do define what collection to use in the order form.
 Use the following assign statement, replace 'your-collection-handle-here' with your collection handle.
 {% assign collection = collections.your-collection-handle-here %}
+Use the assign statement outside of this comment block right below it.
 {% endcomment %}
 
 {% paginate collection.products by 100 %}
 
 {% if collection.products_count > 0 %}
-<div class="action-bar clearfix">
-  <h1 style="float:left">{% if template contains 'page' %}{{ page.title }}{% else %}{{ collection.title }}{% endif %}</h1>
-  <input style="float:right" class="button btn add-to-cart" type="button" value="Add to the cart" />
+<div class="action-bar top clearfix">
+  <h1 class="left">{% if template contains 'page' %}{{ page.title }}{% else %}{{ collection.title }}{% endif %}</h1>
+  <input class="action-button submit button btn right add-to-cart" type="button" value="Add to the cart" />
 </div> 
 {% else %}
 <h1>{% if template contains 'page' %}{{ page.title }}{% else %}{{ collection.title }}{% endif %}</h1>
@@ -52,7 +53,7 @@ Use the following assign statement, replace 'your-collection-handle-here' with y
              </a>
           </td>
           <td style="text-align:right;">
-            <input class="quantity" style="width:60px" data-id="{{ variant.id }}" min="0" {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %}{% assign max = variant.inventory_quantity %}{% for item in cart.items %}{% if item.id == variant.id %}{% assign max = max | minus: item.quantity %}{% endif %}{% endfor %} max="{{ max }}" {% endunless %} type="number" value="0" />
+            <input class="quantity field" style="width:60px" data-id="{{ variant.id }}" min="0" {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %}{% assign max = variant.inventory_quantity %}{% for item in cart.items %}{% if item.id == variant.id %}{% assign max = max | minus: item.quantity %}{% endif %}{% endfor %} max="{{ max }}" {% endunless %} type="number" value="0" />
           </td>
         </tr>
         {% endif %}
@@ -62,7 +63,7 @@ Use the following assign statement, replace 'your-collection-handle-here' with y
   </tbody>
 </table>
 <div class="action-bar clearfix">
-  <input style="float:right" class="button btn add-to-cart" type="button" value="Add to the cart" />
+  <input class="action-button submit button btn right add-to-cart" type="button" value="Add to the cart" />
 </div> 
 {% else %}
 <p>There are no products in this view.</p>
@@ -116,8 +117,18 @@ jQuery(function($) {
 {% endif %}
   
 <style>
-table.pure-table { margin-bottom: 20px; }
+.action-bar { margin: 15px 0; }
+.action-bar.top { margin: 30px 0 15px; }
+.action-bar h1 { margin:0; padding: 0; line-height:1 }
+.left { float: left; }
+.right { float: right; }
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */ 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+table.pure-table { margin-bottom: 20px; width: 100%; }
 table.pure-table tr td:first-child, table.pure-table tr th:first-child { padding-left: 12px; }
 table.pure-table tr td:last-child, table.pure-table tr th:last-child { padding-right: 12px; }
 table.pure-table img { float:left; padding: 5px 0; }
+table.pure-table td { vertical-align: middle; }
 </style>
