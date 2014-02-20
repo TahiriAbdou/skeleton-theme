@@ -1,8 +1,8 @@
 {% comment %}
-If you are not a collection page here, do define what collection to use in the order form.
+If you are not on a collection page, do define which collection to use in the order form.
 Use the following assign statement, replace 'your-collection-handle-here' with your collection handle.
 {% assign collection = collections.your-collection-handle-here %}
-Use the assign statement outside of this comment block right below it.
+Use the assign statement outside of this comment block at the top of your template.
 {% endcomment %}
 
 {% paginate collection.products by 100 %}
@@ -122,10 +122,10 @@ jQuery(function($) {
 .action-bar h1 { margin:0; padding: 0; line-height:1 }
 .left { float: left; }
 .right { float: right; }
-/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */ 
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+/* Additional styles for table */
 table.pure-table { margin-bottom: 20px; width: 100%; }
 table.pure-table tr td:first-child, table.pure-table tr th:first-child { padding-left: 12px; }
 table.pure-table tr td:last-child, table.pure-table tr th:last-child { padding-right: 12px; }
